@@ -1,0 +1,86 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net Default Deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidStudent(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 100 &&
+        data.nis is string && data.nis.size() <= 30 &&
+        data.classGroup is string && data.classGroup.size() <= 50;
+    }
+
+    function isValidMusyrif(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 100;
+    }
+
+    function isValidAssessment(data) {
+      return data.studentId is string && data.studentId.size() <= 128 &&
+        data.studentName is string && data.studentName.size() <= 100 &&
+        data.category is string && data.category.size() <= 30 &&
+        data.surahName is string && data.surahName.size() <= 50 &&
+        data.totalScore is number && data.totalScore >= 0 && data.totalScore <= 100 &&
+        data.grade is string && data.grade.size() <= 30;
+    }
+
+    function isValidClass(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 60;
+    }
+
+    function isValidAttendance(data) {
+      return data.date is string && data.date.size() <= 20 &&
+        data.session is string && data.session.size() <= 30 &&
+        data.classGroup is string && data.classGroup.size() <= 80;
+    }
+
+    match /test/{testId} {
+      allow read: if true;
+    }
+
+    match /students/{studentId} {
+      allow get: if isValidId(studentId);
+      allow list: if true;
+      allow create: if isValidId(studentId) && isValidStudent(request.resource.data);
+      allow update: if isValidId(studentId) && isValidStudent(request.resource.data);
+      allow delete: if isValidId(studentId);
+    }
+
+    match /musyrifs/{musyrifId} {
+      allow get: if isValidId(musyrifId);
+      allow list: if true;
+      allow create: if isValidId(musyrifId) && isValidMusyrif(request.resource.data);
+      allow update: if isValidId(musyrifId) && isValidMusyrif(request.resource.data);
+      allow delete: if isValidId(musyrifId);
+    }
+
+    match /assessments/{assessmentId} {
+      allow get: if isValidId(assessmentId);
+      allow list: if true;
+      allow create: if isValidId(assessmentId) && isValidAssessment(request.resource.data);
+      allow update: if isValidId(assessmentId) && isValidAssessment(request.resource.data);
+      allow delete: if isValidId(assessmentId);
+    }
+
+    match /classes/{classId} {
+      allow get: if isValidId(classId);
+      allow list: if true;
+      allow create: if isValidId(classId) && isValidClass(request.resource.data);
+      allow update: if isValidId(classId) && isValidClass(request.resource.data);
+      allow delete: if isValidId(classId);
+    }
+
+    match /attendances/{attendanceId} {
+      allow get: if isValidId(attendanceId);
+      allow list: if true;
+      allow create: if isValidId(attendanceId) && isValidAttendance(request.resource.data);
+      allow update: if isValidId(attendanceId) && isValidAttendance(request.resource.data);
+      allow delete: if isValidId(attendanceId);
+    }
+  }
+}

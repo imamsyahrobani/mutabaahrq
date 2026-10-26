@@ -1,0 +1,6 @@
+{
+  "name": "NilaiQuran - Penilaian Al-Qur'an Real-Time",
+  "description": "Aplikasi pencatatan dan penilaian bacaan & hafalan Al-Qur'an (Tahfidz & Tahsin) yang simpel, rapi, responsif, dengan penyimpanan real-time Firebase Firestore.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

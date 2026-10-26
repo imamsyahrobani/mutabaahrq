@@ -1,0 +1,332 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Profil santri atau siswa pembelajar Al-Qur'an",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik santri",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Nama lengkap santri",
+          "maxLength": 100
+        },
+        "nis": {
+          "type": "string",
+          "description": "Nomor induk santri",
+          "maxLength": 30
+        },
+        "classGroup": {
+          "type": "string",
+          "description": "Nama kelompok atau halaqah",
+          "maxLength": 50
+        },
+        "gender": {
+          "type": "string",
+          "description": "Jenis kelamin (ikhwan / akhwat)",
+          "enum": ["ikhwan", "akhwat"]
+        },
+        "targetJuz": {
+          "type": "number",
+          "description": "Target capaian Juz"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu pendaftaran santri",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan data",
+          "maxLength": 64
+        }
+      },
+      "required": ["name", "nis", "classGroup"]
+    },
+    "Musyrif": {
+      "title": "Musyrif",
+      "description": "Data penguji, ustadz, atau musyrif halaqah",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik musyrif",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Nama lengkap musyrif beserta gelar",
+          "maxLength": 100
+        },
+        "nip": {
+          "type": "string",
+          "description": "Nomor induk pengajar / ID Musyrif",
+          "maxLength": 30
+        },
+        "role": {
+          "type": "string",
+          "description": "Peran atau spesialisasi (Ustadz Tahfidz, Musyrif Halaqah, Penguji Tasmi', dll)",
+          "maxLength": 60
+        },
+        "phone": {
+          "type": "string",
+          "description": "Nomor telepon / WhatsApp",
+          "maxLength": 30
+        },
+        "assignedHalaqah": {
+          "type": "string",
+          "description": "Halaqah atau kelas binaan",
+          "maxLength": 80
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu pendaftaran",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan",
+          "maxLength": 64
+        }
+      },
+      "required": ["name"]
+    },
+    "Assessment": {
+      "title": "Assessment",
+      "description": "Catatan penilaian hafalan atau bacaan Al-Qur'an",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik penilaian",
+          "maxLength": 128
+        },
+        "studentId": {
+          "type": "string",
+          "description": "ID referensi santri",
+          "maxLength": 128
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Nama santri saat dinilai",
+          "maxLength": 100
+        },
+        "classGroup": {
+          "type": "string",
+          "description": "Kelas atau halaqah santri",
+          "maxLength": 50
+        },
+        "category": {
+          "type": "string",
+          "description": "Kategori penilaian: tahfidz, tahsin, tilawah, ziyadah, murajaah",
+          "maxLength": 30
+        },
+        "session": {
+          "type": "string",
+          "description": "Sesi ujian / setoran (Sesi 1, Sesi 2, Sesi 3, Sesi 4)",
+          "maxLength": 30
+        },
+        "surahName": {
+          "type": "string",
+          "description": "Nama surat Al-Qur'an",
+          "maxLength": 50
+        },
+        "surahNumber": {
+          "type": "number",
+          "description": "Nomor surat (1 - 114)"
+        },
+        "ayahStart": {
+          "type": "number",
+          "description": "Ayat mulai dinilai"
+        },
+        "ayahEnd": {
+          "type": "number",
+          "description": "Ayat akhir dinilai"
+        },
+        "juz": {
+          "type": "number",
+          "description": "Juz Al-Qur'an (1 - 30)"
+        },
+        "kelancaran": {
+          "type": "number",
+          "description": "Skor fashahah / kelancaran hafalan (0 - 100)"
+        },
+        "tajwid": {
+          "type": "number",
+          "description": "Skor kaidah hukum tajwid (0 - 100)"
+        },
+        "makhraj": {
+          "type": "number",
+          "description": "Skor ketepatan makharijul huruf (0 - 100)"
+        },
+        "adab": {
+          "type": "number",
+          "description": "Skor adab, waqaf & ibtida, kerapian (0 - 100)"
+        },
+        "totalScore": {
+          "type": "number",
+          "description": "Nilai rata-rata kumulatif (0 - 100)"
+        },
+        "grade": {
+          "type": "string",
+          "description": "Predikat kelulusan (Mumtaz, Jayyid Jiddan, Jayyid, Maqbul, Rasib)",
+          "maxLength": 30
+        },
+        "notes": {
+          "type": "string",
+          "description": "Catatan perbaikan atau apresiasi dari ustadz/penguji",
+          "maxLength": 500
+        },
+        "examinerName": {
+          "type": "string",
+          "description": "Nama penguji atau ustadz",
+          "maxLength": 100
+        },
+        "date": {
+          "type": "string",
+          "description": "Tanggal ujian / setoran (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu data dibuat",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan data",
+          "maxLength": 64
+        }
+      },
+      "required": ["studentId", "studentName", "category", "surahName", "totalScore", "grade"]
+    },
+    "HalaqahClass": {
+      "title": "HalaqahClass",
+      "description": "Data kelompok halaqah atau kelas mengaji",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID kelas",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Nama kelas / halaqah",
+          "maxLength": 60
+        },
+        "ustadz": {
+          "type": "string",
+          "description": "Nama ustadz pembina",
+          "maxLength": 100
+        },
+        "description": {
+          "type": "string",
+          "description": "Deskripsi tingkatan atau jadwal",
+          "maxLength": 200
+        }
+      },
+      "required": ["name"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Rekap absensi santri per sesi kegiatan belajar mengajar",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID unik catatan absensi",
+          "maxLength": 128
+        },
+        "date": {
+          "type": "string",
+          "description": "Tanggal absensi (YYYY-MM-DD)",
+          "maxLength": 20
+        },
+        "dayName": {
+          "type": "string",
+          "description": "Nama hari (Senin, Selasa, Rabu, Kamis, Jumat, Sabtu, Ahad)",
+          "maxLength": 20
+        },
+        "session": {
+          "type": "string",
+          "description": "Sesi absensi (Sesi 1, Sesi 2, Sesi 3, Sesi 4)",
+          "maxLength": 30
+        },
+        "classGroup": {
+          "type": "string",
+          "description": "Kelompok halaqah atau Semua",
+          "maxLength": 80
+        },
+        "records": {
+          "type": "array",
+          "description": "Daftar kehadiran tiap santri",
+          "items": {
+            "type": "object"
+          }
+        },
+        "summary": {
+          "type": "object",
+          "description": "Ringkasan total, hadir, izin, sakit, alpa"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Catatan khusus sesi absensi",
+          "maxLength": 500
+        },
+        "recordedBy": {
+          "type": "string",
+          "description": "Nama musyrif / pencatat absensi",
+          "maxLength": 100
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Waktu pembuatan data",
+          "maxLength": 64
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Waktu pembaruan data",
+          "maxLength": 64
+        }
+      },
+      "required": ["date", "session", "classGroup"]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": {
+        "$ref": "#/entities/Student"
+      },
+      "description": "Koleksi data santri"
+    },
+    "/musyrifs/{musyrifId}": {
+      "schema": {
+        "$ref": "#/entities/Musyrif"
+      },
+      "description": "Koleksi data musyrif, ustadz, dan penguji Al-Qur'an"
+    },
+    "/assessments/{assessmentId}": {
+      "schema": {
+        "$ref": "#/entities/Assessment"
+      },
+      "description": "Koleksi riwayat penilaian Al-Qur'an"
+    },
+    "/classes/{classId}": {
+      "schema": {
+        "$ref": "#/entities/HalaqahClass"
+      },
+      "description": "Koleksi daftar kelas atau halaqah tahfidz"
+    },
+    "/attendances/{attendanceId}": {
+      "schema": {
+        "$ref": "#/entities/AttendanceRecord"
+      },
+      "description": "Koleksi catatan absensi per sesi"
+    }
+  }
+}
